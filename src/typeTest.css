@@ -1,6 +1,12 @@
 .word-container{
 	display: flex;
-	height: 200px; 
+	flex-wrap: wrap;
 	width: 700px; 
-	overflow-x: auto;
+	font-size: 0;
+}
+
+.outer-word-container{
+	border: 1px solid white;
+	height: 200px;
+	overflow-y: hidden;
 }
