@@ -1,0 +1,20 @@
+.correct{
+	color: #1dd1a1;
+}
+
+.incorrect{
+	color: #ee5253;
+}
+
+.extra{
+	color: #feca57;
+}
+
+.word{
+	font-size: 0;
+	margin-right: 10px;
+}
+
+letter{
+	font-size: 30px;
+}
