@@ -1,11 +1,10 @@
 import React from 'react'
 import Timer from "./Timer.js"
 
-export default function Game({givenMin, givenSec}) {
-
+export default function Game( props ) {
 	return (
 		<div>
-			<Timer initMin={givenMin} initSec={givenSec} />
+			<Timer initMin={props.givenMin} initSec={props.givenSec} />
 			<h1> Start Typing... </h1>
 		</div>
 	)

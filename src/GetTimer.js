@@ -1,28 +1,16 @@
 
-import React, {useState} from "react";
+import React from "react";
 
 export default function GetTimer(props) {
-
-    const [min, setMin]=useState(0);
-    const [sec, setSec]=useState(0);
-
-    function getMinData ( val ) { setMin(val.target.value) }
-    function getSecData ( val ) { setSec(val.target.value) }
 
     return (
         <div className="TimeInp">
             <h1> Enter Time Interval </h1>
 
-            <input type="number" onChange={getMinData} />
-            <input type="number" onChange={getSecData} />
+            <input type="text" value={props.min} onChange={m => props.setM(m.target.value)} />
+            <input type="text" value={props.sec} onChange={s => props.setS(s.target.value)} />
 
-            <button onClick={() => 
-                {
-                    props.setT(true);
-                    props.setM({min});
-                    props.setS({sec});
-                }
-            }> 
+            <button onClick={() => props.setT(true) }> 
                 Enter 
             </button>
         </div>

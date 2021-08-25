@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 
 // calculates and returns the Timer in the syntax of (minutes:seconds)
 const Timer = ({initMin, initSec}) => {
-    const [ minutes, setMinutes ] = useState(initMin);
-    const [ seconds, setSeconds ] =  useState(initSec);
+    const [ minutes, setMinutes ] = useState(parseInt(initMin));
+    const [ seconds, setSeconds ] =  useState(parseInt(initSec));
     useEffect(() => {
         let myInterval = setInterval(() => {
             if (seconds > 0) {
@@ -18,7 +18,7 @@ const Timer = ({initMin, initSec}) => {
                     setMinutes( old => old - 1 );
                     setSeconds(59);
                 }
-            } 
+            }
         }, 1000)
         return () => { clearInterval(myInterval); };
     });
