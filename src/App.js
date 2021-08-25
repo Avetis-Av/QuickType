@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'; 
+import Welcome from './Welcome';
 
 // App only returns Welcome Page so far
 function App() {
+  const [game, setGame] = useState(false); 
   return (
-    <div> 
-      <h1> Welcome to QuickType </h1> 
-    </div>
+    {game ? <Welcome start={}/>}
   );
 }
 
