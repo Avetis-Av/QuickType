@@ -4,7 +4,7 @@ import './typeTest.css'
 
 export default function TypeTest() {
 	const test1 = "the quick brown fox jumped over a tree and tripped over that tree";
-	const test1Arr = test1.split(' ');
+	const [test1Arr, setTest] = useState(test1.split(' ')); 
 	const tempStyles = []; 
 	for (var i = 0; i < test1Arr.length; ++i){
 		var letterStyles = []; 
@@ -24,7 +24,20 @@ export default function TypeTest() {
 		const alterStyle = (e) => {
 			var temp = styles.slice(); 
 			if (e.code === 'Space'){ setWord(old => old + 1); setPrev(currChar); setChar(-1);}
-			else if (e.code === 'Backspace') {setWord(old => old - 1); setChar(prevPos - 1);}
+			else if (e.code === 'Backspace') {
+				if (currChar === 0) {setWord(old => old - 1); setChar(prevPos - 1);}
+				else{
+					setChar(old => old - 2);
+					temp[currWord][currChar] = ''; 
+					console.log(currChar); 
+				}
+			}
+			else if (currChar >= test1Arr[currWord].length){
+				var testTemp = test1Arr.slice(); 
+				testTemp[currWord] += e.code[e.code.length -1].toLowerCase(); 
+				setTest(testTemp); 
+				temp[currWord][currChar] = 'extra'; 
+			}
 			else if (e.code === "Key" + test1Arr[currWord][currChar].toUpperCase()) temp[currWord][currChar] = 'correct'; 
 			else if (e.code !== "Key" + test1Arr[currWord][currChar].toUpperCase()) temp[currWord][currChar] = 'incorrect'; 
 			setStyles(temp); 
