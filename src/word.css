@@ -13,6 +13,7 @@
 .word{
 	font-size: 0;
 	margin-right: 10px;
+	height: 30px;
 }
 
 letter{
