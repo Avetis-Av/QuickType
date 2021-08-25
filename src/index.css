@@ -4,10 +4,10 @@
 *{
     font-family: 'Roboto Mono', monospace;
     color: #c8d6e5;
+    background-color: #222f3e;
 }
 
 body {
-    background-color: #222f3e;
     display: flex;
     align-items: center;
     justify-content: center;
