@@ -1,5 +1,5 @@
 
-import React from "react";
+import React from 'react';
 import './GetTimer.css';
 
 export default function GetTimer(props) {
