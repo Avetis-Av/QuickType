@@ -16,7 +16,7 @@ function isCharacterKeyPress(evt) {
 }
 
 
-export default function TypeTest() {
+export default function TypeTest({setStlLst}) {
 	const test1 = "the quick brown fox jumped over a tree and tripped over that tree";
 	const [test1Arr, setTest] = useState(test1.split(' ')); 
 	const tempStyles = []; 
@@ -27,7 +27,6 @@ export default function TypeTest() {
 		}
 		tempStyles.push(letterStyles); 
 	}
-	
 	const [styles, setStyles] = useState(tempStyles); 
 	
 	const [currWord, setWord] = useState(0); 
@@ -35,6 +34,8 @@ export default function TypeTest() {
 	const [prevPos, setPrev] = useState(0); 
 
 	useEffect(() => {
+		
+		setStlLst(styles);
 		const alterStyle = (e) => {
 			if (e.key !== 'Backspace' && (!isCharacterKeyPress(e) || e.key === 'Shift')) return; 
 			var advance = 1; 
@@ -71,7 +72,7 @@ export default function TypeTest() {
 		window.addEventListener("keydown", alterStyle);
 	
 		return () => window.removeEventListener("keydown", alterStyle);
-	  }, [currChar, currWord, styles, prevPos, test1Arr]);
+	  }, [currChar, currWord, styles, prevPos, test1Arr, setStlLst]);
 
 	return (
 		<div className='outer-word-container'>

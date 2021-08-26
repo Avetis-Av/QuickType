@@ -3,9 +3,10 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 
 // calculates and returns the Timer in the syntax of (minutes:seconds)
-const Timer = ({initMin, initSec}) => {
+const Timer = ({initMin, initSec, setFin}) => {
     const [ minutes, setMinutes ] = useState(parseInt(initMin));
     const [ seconds, setSeconds ] =  useState(parseInt(initSec));
+    // const [ timeEnd, setTimeEnd ] = useState(false);
     useEffect(() => {
         let myInterval = setInterval(() => {
             if (seconds > 0) {
@@ -13,6 +14,7 @@ const Timer = ({initMin, initSec}) => {
             }
             if (seconds === 0) {
                 if (minutes === 0) {
+                    setFin(true); // Ends the game
                     clearInterval(myInterval)
                 } else {
                     setMinutes( old => old - 1 );
@@ -22,15 +24,9 @@ const Timer = ({initMin, initSec}) => {
         }, 1000)
         return () => { clearInterval(myInterval); };
     });
-
-    return (
-        <div>
-            { minutes === 0 && seconds === 0
-                ? <h1> No More Time Left! </h1>
-                : <h1> {minutes}:{seconds < 10 ?  `0${seconds}` : seconds} </h1> 
-            }
-        </div>
-    )
+    return ( 
+        <h1> {minutes}:{seconds < 10 ?  `0${seconds}` : seconds} </h1>
+    );
 }
 
 export default Timer;
