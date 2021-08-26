@@ -9,7 +9,7 @@ function App() {
   const [game, setGame] = useState(false); 
   const [timer, setTimer] = useState(false);
   const [min, setMin]=useState(0);
-  const [sec, setSec]=useState(0);
+  const [sec, setSec]=useState(45);
 
   function getPage () {
     if ( !game && !timer ) { return ( <Welcome setStart={setGame} /> ); } 
