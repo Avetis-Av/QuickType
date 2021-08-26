@@ -10,7 +10,7 @@ function isCharacterKeyPress(evt) {
         // In other browsers except old versions of WebKit, evt.which is
         // only greater than zero if the keypress is a printable key.
         // We need to filter out backspace and ctrl/alt/meta key combinations
-        return !evt.ctrlKey && !evt.metaKey && !evt.altKey && evt.which != 8;
+        return !evt.ctrlKey && !evt.metaKey && !evt.altKey && evt.which !== 8;
     }
     return false;
 }
