@@ -14,7 +14,7 @@ function App() {
   function getPage () {
     if ( !game && !timer ) { return ( <Welcome setStart={setGame} /> ); } 
     else if ( game && !timer ) { return ( <GetTimer setT={setTimer} setM={setMin} setS={setSec} min={min} sec={sec} /> ); }
-    else if ( timer ) { return ( <Game givenMin={min} givenSec={sec} /> ); }
+    else if ( timer ) { return ( <Game givenMin={ !isNaN(min)? 0: min } givenSec={ !isNaN(sec)? 0: sec } /> ); }
   }
 
   return ( getPage() );
