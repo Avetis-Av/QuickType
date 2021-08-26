@@ -1,25 +1,36 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 
 export default function Score ({styles}) {
-    var total = Math.ceil(styles.length/5);
-    var totScore = 0;
-    //var recStyles = [];
+    const total = Math.ceil(styles.length/5);
 
-    useEffect(() => {
-        for ( var i = 0; i < styles.length; i += 5 ) {
-            var curScore = 0;
-            var j = 0;
-            for ( j = 0; j < 5 || j + i < styles.length; ++j ) {
-                if ( styles[i + j][styles[i + j].length - 1] === "correct" ) ++curScore;
+    function getScore() {
+        var index = 0;
+        var total = 0;
+        var curScore = 0;
+        var newStyles = [];
+
+        for ( var j = 0; j < styles.length; ++j ) newStyles = newStyles.concat( styles[j] );
+
+        for ( var i = 0; i < newStyles.length; ++i ) {
+            ++index;
+            newStyles[i] === "correct" && ++curScore;
+            console.log("Score: " + curScore);
+            if ( index === 5 || curScore === 5 ) {
+                index = 0;
+                curScore = 0;
+                if ( curScore === 5 ) ++total;
+                console.log("Total: " + total);
             }
-            totScore += Math.floor( curScore/j );
         }
-    });
+        return total;
+    }
+
+    var totScore = getScore();
     
     return (
         <div>
-            <h1> {styles[0][ styles[0].length - 1 ]} </h1>
+            <h1> {styles.length} </h1>
             <h1> {total} </h1>
             <h1> {totScore} </h1>
         </div> 
