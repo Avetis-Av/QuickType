@@ -2,6 +2,20 @@ import React, {useState, useEffect} from 'react';
 import Word from './word'; 
 import './typeTest.css' 
 
+function isCharacterKeyPress(evt) {
+    if (typeof evt.which == "undefined") {
+        // This is IE, which only fires keypress events for printable keys
+        return true;
+    } else if (typeof evt.which == "number" && evt.which > 0) {
+        // In other browsers except old versions of WebKit, evt.which is
+        // only greater than zero if the keypress is a printable key.
+        // We need to filter out backspace and ctrl/alt/meta key combinations
+        return !evt.ctrlKey && !evt.metaKey && !evt.altKey && evt.which != 8;
+    }
+    return false;
+}
+
+
 export default function TypeTest() {
 	const test1 = "the quick brown fox jumped over a tree and tripped over that tree";
 	const [test1Arr, setTest] = useState(test1.split(' ')); 
@@ -22,26 +36,36 @@ export default function TypeTest() {
 
 	useEffect(() => {
 		const alterStyle = (e) => {
+			if (e.key !== 'Backspace' && (!isCharacterKeyPress(e) || e.key === 'Shift')) return; 
+			var advance = 1; 
 			var temp = styles.slice(); 
-			if (e.code === 'Space'){ setWord(old => old + 1); setPrev(currChar); setChar(-1);}
+			if (e.code === 'Space'){
+				setWord(old => old + 1);
+				setPrev(currChar);
+				advance = -currChar;
+			}
 			else if (e.code === 'Backspace') {
-				if (currChar === 0) {setWord(old => old - 1); setChar(prevPos - 1);}
+				if (currChar === 0) {
+					setWord(old => old - 1);
+					advance = -currChar + prevPos; 
+				}
 				else{
-					setChar(old => old - 2);
+					advance = -1; 
 					temp[currWord][currChar] = ''; 
-					console.log(currChar); 
+					setStyles(temp); 
 				}
 			}
 			else if (currChar >= test1Arr[currWord].length){
 				var testTemp = test1Arr.slice(); 
-				testTemp[currWord] += e.code[e.code.length -1].toLowerCase(); 
+				testTemp[currWord] += e.key; 
 				setTest(testTemp); 
 				temp[currWord][currChar] = 'extra'; 
 			}
-			else if (e.code === "Key" + test1Arr[currWord][currChar].toUpperCase()) temp[currWord][currChar] = 'correct'; 
-			else if (e.code !== "Key" + test1Arr[currWord][currChar].toUpperCase()) temp[currWord][currChar] = 'incorrect'; 
+			else if (e.key === test1Arr[currWord][currChar]) temp[currWord][currChar] = 'correct'; 
+			else if (e.key !== test1Arr[currWord][currChar]) temp[currWord][currChar] = 'incorrect'; 
 			setStyles(temp); 
-			setChar(old => old + 1); 
+			setChar(old => old + advance); 
+			console.log(e.key); 
 		}
 	
 		window.addEventListener("keydown", alterStyle);
