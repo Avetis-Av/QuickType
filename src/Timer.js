@@ -8,7 +8,7 @@ const Timer = ({initMin, initSec, setFin}) => {
     const [ seconds, setSeconds ] =  useState(parseInt(initSec));
     // const [ timeEnd, setTimeEnd ] = useState(false);
     useEffect(() => {
-        let myInterval = setInterval(() => {
+        const myInterval = setInterval(() => {
             if (seconds > 0) {
                 setSeconds( old => old - 1 );
             }
@@ -23,7 +23,7 @@ const Timer = ({initMin, initSec, setFin}) => {
             }
         }, 1000)
         return () => { clearInterval(myInterval); };
-    });
+    }, [minutes, seconds, setFin]);
     return ( 
         <h1> {minutes}:{seconds < 10 ?  `0${seconds}` : seconds} </h1>
     );
