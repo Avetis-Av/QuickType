@@ -72,9 +72,9 @@ export default function TypeTest({setStlLst, word}) {
 				} 
 			}
 			else if (currChar >= test1Arr[currWord].length){
-				var testTemp = test1Arr.slice(); 
-				testTemp[currWord] += e.key; 
-				setTest(testTemp); 
+				var wordTemp = test1Arr.slice(); 
+				wordTemp[currWord] += e.key; 
+				setTest(wordTemp); 
 				temp[currWord][currChar] = 'extra '; 
 			}
 			else if (e.key === test1Arr[currWord][currChar]){
