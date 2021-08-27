@@ -1,14 +1,7 @@
 import React, {useState, useEffect} from 'react'; 
 import Word from './word'; 
 import './typeTest.css' 
-
-function removeCurr(s){
-	if (s==='') return; 
-	var temp = s.split(' '); 
-	if (temp[temp.length - 1] === 'current') temp.pop(); 
-	return temp.join(' '); 
-}
-
+ 
 function isCharacterKeyPress(evt) {
     if (typeof evt.which == "undefined") {
         // This is IE, which only fires keypress events for printable keys
@@ -23,9 +16,8 @@ function isCharacterKeyPress(evt) {
 }
 
 
-export default function TypeTest({setStlLst}) {
-	const test1 = "the quick brown fox jumped over a tree and tripped over that tree";
-	const [test1Arr, setTest] = useState(test1.split(' ')); 
+export default function TypeTest({setStlLst, word}) {
+	const [test1Arr, setTest] = useState(word.split(' ')); 
 	const tempStyles = []; 
 	for (var i = 0; i < test1Arr.length; ++i){
 		var letterStyles = []; 
@@ -49,7 +41,6 @@ export default function TypeTest({setStlLst}) {
 			var advance = 1; 
 			var temp = styles.slice(); 
 			temp[currWord][currChar] = ''; 
-			temp[currWord][currChar + 1] = 'current'; 
 			if (e.code === 'Space'){
 				setWord(old => old + 1);
 				setPrev(currChar);
@@ -59,22 +50,26 @@ export default function TypeTest({setStlLst}) {
 			else if (e.code === 'Backspace') {
 				if (!currWord && !currChar) return; 
 				if (!currChar) {
+					if (prevPos === -1) return; 
 					temp[currWord][currChar] = ''; 
 					setWord(old => old - 1);
 					advance = -currChar + prevPos; 
+					temp[currWord-1][prevPos] = 'current';
+					setPrev(-1);  
 				}
 				else{
-					advance = -1; 
+					advance = -1;  
 					if (temp[currWord][currChar-1].includes('extra')){
 						var testTemp = test1Arr.slice(); 
 						testTemp[currWord] = testTemp[currWord].substring(0, testTemp[currWord].length-1); 
 						setTest(testTemp);
 						temp[currWord].pop();
 					}
-					else temp[currWord][currChar-1] = ''; 
+					else{
+						temp[currWord][currChar-1] = 'current'; 
+					}
 					setStyles(temp); 
-				}
-				console.log(temp[currWord][currChar])
+				} 
 			}
 			else if (currChar >= test1Arr[currWord].length){
 				var testTemp = test1Arr.slice(); 
@@ -82,11 +77,16 @@ export default function TypeTest({setStlLst}) {
 				setTest(testTemp); 
 				temp[currWord][currChar] = 'extra '; 
 			}
-			else if (e.key === test1Arr[currWord][currChar]) temp[currWord][currChar] = 'correct '; 
-			else if (e.key !== test1Arr[currWord][currChar]) temp[currWord][currChar] = 'incorrect '; 
+			else if (e.key === test1Arr[currWord][currChar]){
+				temp[currWord][currChar] = 'correct '; 
+				temp[currWord][currChar+1] = 'current'; 
+			}
+			else if (e.key !== test1Arr[currWord][currChar]){
+				temp[currWord][currChar] = 'incorrect '; 
+				temp[currWord][currChar+1] = 'current'; 
+			}
 			setChar(old => old + advance); 
 			setStyles(temp); 
-			console.log(e.key); 
 		}
 	
 		window.addEventListener("keydown", alterStyle);
@@ -102,3 +102,4 @@ export default function TypeTest({setStlLst}) {
 		</div>
 	)
 }
+
