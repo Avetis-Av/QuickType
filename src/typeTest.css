@@ -21,6 +21,6 @@
 		border-left: 1px solid white;
 	}
 	100%{
-		border-left: 0px solid white;
+		border-left: 1px solid transparent;
 	}
 }
