@@ -23,6 +23,7 @@ export default function TypeTest({setStlLst}) {
 	for (var i = 0; i < test1Arr.length; ++i){
 		var letterStyles = []; 
 		for (var j = 0; j < test1Arr[i].length; ++j){
+			if (!i && !j) letterStyles.push('current'); 
 			letterStyles.push(''); 
 		}
 		tempStyles.push(letterStyles); 
@@ -46,15 +47,24 @@ export default function TypeTest({setStlLst}) {
 				advance = -currChar;
 			}
 			else if (e.code === 'Backspace') {
-				if (currChar === 0) {
+				if (!currWord && !currChar) return; 
+				if (!currChar) {
+					temp[currWord][currChar] = ''; 
 					setWord(old => old - 1);
 					advance = -currChar + prevPos; 
 				}
 				else{
 					advance = -1; 
-					temp[currWord][currChar] = ''; 
+					if (temp[currWord][currChar-1] === 'extra'){
+						var testTemp = test1Arr.slice(); 
+						testTemp[currWord] = testTemp[currWord].substring(0, testTemp[currWord].length-1); 
+						setTest(testTemp);
+						temp[currWord].pop();
+					}
+					else temp[currWord][currChar-1] = ''; 
 					setStyles(temp); 
 				}
+				console.log(temp[currWord][currChar])
 			}
 			else if (currChar >= test1Arr[currWord].length){
 				var testTemp = test1Arr.slice(); 
