@@ -8,7 +8,7 @@ export default function Score ({styles, minutes, setDef}) {
         var newStyles = [];
 
         for ( var j = 0; j < styles.length; ++j ) newStyles = newStyles.concat( styles[j] );
-        for (var i = 0; i < newStyles.length; ++i) newStyles[i] === 'correct' && ++curScore;
+        for (var i = 0; i < newStyles.length; ++i)  if ( newStyles[i].includes('correct') ) ++curScore;
 
         var num = Math.floor(curScore/5 + 0.01)
         return ( !isNaN( num )? num: 0 );
