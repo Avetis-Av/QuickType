@@ -39,13 +39,15 @@ export default function TypeTest({setStlLst, word}) {
 		const alterStyle = (e) => {
 			if (e.key !== 'Backspace' && (!isCharacterKeyPress(e) || e.key === 'Shift')) return; 
 			var advance = 1; 
+			var scroll = false; 
 			var temp = styles.slice(); 
 			temp[currWord][currChar] = ''; 
 			if (e.code === 'Space'){
 				setWord(old => old + 1);
 				setPrev(currChar);
 				advance = -currChar;
-				temp[currWord+1][0] = 'current'; 
+				temp[currWord+1][0] = 'current';  
+				scroll = true; 
 			}
 			else if (e.code === 'Backspace') {
 				if (!currWord && !currChar) return; 
@@ -56,6 +58,7 @@ export default function TypeTest({setStlLst, word}) {
 					advance = -currChar + prevPos; 
 					temp[currWord-1][prevPos] = 'current';
 					setPrev(-1);  
+					scroll = true; 
 				}
 				else{
 					advance = -1;  
@@ -87,6 +90,10 @@ export default function TypeTest({setStlLst, word}) {
 			}
 			setChar(old => old + advance); 
 			setStyles(temp); 
+			if (scroll){
+				let cur = document.getElementsByClassName('current'); 
+				if (cur.length) cur[0].scrollIntoView({behavior : 'smooth', block : 'center'}) 
+			}
 		}
 	
 		window.addEventListener("keydown", alterStyle);
