@@ -2,6 +2,13 @@ import React, {useState, useEffect} from 'react';
 import Word from './word'; 
 import './typeTest.css' 
 
+function removeCurr(s){
+	if (s==='') return; 
+	var temp = s.split(' '); 
+	if (temp[temp.length - 1] === 'current') temp.pop(); 
+	return temp.join(' '); 
+}
+
 function isCharacterKeyPress(evt) {
     if (typeof evt.which == "undefined") {
         // This is IE, which only fires keypress events for printable keys
@@ -41,10 +48,13 @@ export default function TypeTest({setStlLst}) {
 			if (e.key !== 'Backspace' && (!isCharacterKeyPress(e) || e.key === 'Shift')) return; 
 			var advance = 1; 
 			var temp = styles.slice(); 
+			temp[currWord][currChar] = ''; 
+			temp[currWord][currChar + 1] = 'current'; 
 			if (e.code === 'Space'){
 				setWord(old => old + 1);
 				setPrev(currChar);
 				advance = -currChar;
+				temp[currWord+1][0] = 'current'; 
 			}
 			else if (e.code === 'Backspace') {
 				if (!currWord && !currChar) return; 
@@ -55,7 +65,7 @@ export default function TypeTest({setStlLst}) {
 				}
 				else{
 					advance = -1; 
-					if (temp[currWord][currChar-1] === 'extra'){
+					if (temp[currWord][currChar-1].includes('extra')){
 						var testTemp = test1Arr.slice(); 
 						testTemp[currWord] = testTemp[currWord].substring(0, testTemp[currWord].length-1); 
 						setTest(testTemp);
@@ -70,12 +80,12 @@ export default function TypeTest({setStlLst}) {
 				var testTemp = test1Arr.slice(); 
 				testTemp[currWord] += e.key; 
 				setTest(testTemp); 
-				temp[currWord][currChar] = 'extra'; 
+				temp[currWord][currChar] = 'extra '; 
 			}
-			else if (e.key === test1Arr[currWord][currChar]) temp[currWord][currChar] = 'correct'; 
-			else if (e.key !== test1Arr[currWord][currChar]) temp[currWord][currChar] = 'incorrect'; 
-			setStyles(temp); 
+			else if (e.key === test1Arr[currWord][currChar]) temp[currWord][currChar] = 'correct '; 
+			else if (e.key !== test1Arr[currWord][currChar]) temp[currWord][currChar] = 'incorrect '; 
 			setChar(old => old + advance); 
+			setStyles(temp); 
 			console.log(e.key); 
 		}
 	
