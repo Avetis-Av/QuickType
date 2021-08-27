@@ -17,4 +17,5 @@
 
 letter{
 	font-size: 30px;
+	border-left: 1px solid transparent;
 }
