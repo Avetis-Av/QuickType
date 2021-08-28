@@ -3,8 +3,8 @@ import Welcome from './Welcome';
 import GetTimer from './GetTimer';
 import Game from './Game';
 import Score from './Score';
+import './app.css';
 
-// App only returns Welcome Page so far
 function App() {
 
   const [game, setGame] = useState(false);
@@ -32,7 +32,7 @@ function App() {
   return (
     <div> 
       {getPage()}
-      <div className="Contacts"> 
+      <div className="contacts"> 
         Made By: <a href="https://www.linkedin.com/in/kefan-cao-2801bb165/">Kefan Cao</a> and <a href="https://www.linkedin.com/in/avetis-avagyan/">Avetis Avagyan</a>
       </div>
     </div>
