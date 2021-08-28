@@ -2,7 +2,8 @@
 .contacts {
     position: absolute;
     bottom: 5%;
-    left: 34.5%;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 20px;
 }
 

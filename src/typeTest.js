@@ -91,7 +91,8 @@ export default function TypeTest({setStlLst, word}) {
 			setChar(old => old + advance); 
 			setStyles(temp); 
 			if (scroll){
-				let cur = document.getElementsByClassName('current'); 
+				let cur = document.getElementsByClassName('current');
+				console.log(cur.length);  
 				if (cur.length) cur[0].scrollIntoView({behavior : 'smooth', block : 'center'}) 
 			}
 		}
