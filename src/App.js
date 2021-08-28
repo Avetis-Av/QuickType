@@ -1,10 +1,10 @@
-import React, {useState} from 'react'; 
+import React, {useState} from 'react';
 import Welcome from './Welcome';
 import GetTimer from './GetTimer';
 import Game from './Game';
 import Score from './Score';
+import './app.css';
 
-// App only returns Welcome Page so far
 function App() {
 
   const [game, setGame] = useState(false);
@@ -29,7 +29,14 @@ function App() {
     else if ( fin ) { return ( <Score styles={styles} minutes={ min + sec/60 } setDef={setDef} /> ); }
   }
 
-  return ( getPage() );
+  return (
+    <div> 
+      {getPage()}
+      <div className="contacts"> 
+        Made By: <a href="https://www.linkedin.com/in/kefan-cao-2801bb165/">Kefan Cao</a> and <a href="https://www.linkedin.com/in/avetis-avagyan/">Avetis Avagyan</a>
+      </div>
+    </div>
+  );
 }
 
 export default App;
