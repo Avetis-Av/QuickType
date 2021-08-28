@@ -29,10 +29,16 @@ function App() {
     else if ( !fin && timer ) { return ( <Game givenMin={ !isNaN(min)? min: 0 } givenSec={ !isNaN(sec)? sec: 0 } setStyles={setStyles} setFin={setFin} /> ); }
     else if ( fin ) { return ( <Score styles={styles} minutes={ min + sec/60 } setDef={setDef} /> ); }
   }
-{/* <div className="contacts"> 
+
+  return (
+    <>
+    {getPage()}
+    <div className="contacts"> 
         Made By: <a href="https://www.linkedin.com/in/kefan-cao-2801bb165/" target="_blank" rel="noreferrer">Kefan Cao</a> and <a href="https://www.linkedin.com/in/avetis-avagyan/">Avetis Avagyan</a>
-      </div> */}
-  return (getPage());
+    </div>
+    </>
+
+  );
 }
 
 export default App;

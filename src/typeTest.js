@@ -93,7 +93,7 @@ export default function TypeTest({setStlLst, word}) {
 			if (scroll){
 				let cur = document.getElementsByClassName('current');
 				console.log(cur.length);  
-				if (cur.length) cur[0].scrollIntoView({behavior : 'smooth', block : 'center'}) 
+				if (cur.length) cur[0].scrollIntoView({behavior : 'auto', block : 'center'}) 
 			}
 		}
 	
