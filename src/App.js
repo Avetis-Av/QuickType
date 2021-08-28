@@ -1,4 +1,4 @@
-import React, {useState} from 'react'; 
+import React, {useState} from 'react';
 import Welcome from './Welcome';
 import GetTimer from './GetTimer';
 import Game from './Game';
@@ -29,7 +29,14 @@ function App() {
     else if ( fin ) { return ( <Score styles={styles} minutes={ min + sec/60 } setDef={setDef} /> ); }
   }
 
-  return ( getPage() );
+  return (
+    <div> 
+      {getPage()}
+      <div className="Contacts"> 
+        Made By: <a href="https://www.linkedin.com/in/kefan-cao-2801bb165/">Kefan Cao</a> and <a href="https://www.linkedin.com/in/avetis-avagyan/">Avetis Avagyan</a>
+      </div>
+    </div>
+  );
 }
 
 export default App;
