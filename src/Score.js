@@ -22,7 +22,7 @@ export default function Score ({styles, minutes, setDef}) {
         <div className="score">
             <h1> Your Score Is: </h1>
             <h1> {Math.round(((totScore/minutes) + Number.EPSILON) * 100) / 100} WPM </h1>
-            <button class="button-50" role="button" onClick={() => setDef() }>
+            <button class="button-50" onClick={() => setDef() }>
                 Try Again?
             </button>
         </div> 
