@@ -1,11 +1,12 @@
 import React from 'react'
 import './welcome.css'
+import './button.css'
 
 export default function Welcome(props) {
 	return (
 		<div className="welcome">
 			<h1>Welcome to QuickType</h1>
-			<button onClick={()=>props.setStart(true)}>Join Game</button>
+			<button onClick={()=>props.setStart(true)} class="button-50 join" role="button">Join Game</button>
 		</div>
 	)
 }
