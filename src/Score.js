@@ -1,6 +1,7 @@
 
 import React from 'react';
 import './score.css';
+import './button.css';
 
 export default function Score ({styles, minutes, setDef}) {
 
@@ -21,7 +22,7 @@ export default function Score ({styles, minutes, setDef}) {
         <div className="score">
             <h1> Your Score Is: </h1>
             <h1> {Math.round(((totScore/minutes) + Number.EPSILON) * 100) / 100} WPM </h1>
-            <button onClick={() => setDef() }>
+            <button class="button-50" role="button" onClick={() => setDef() }>
                 Try Again?
             </button>
         </div> 
