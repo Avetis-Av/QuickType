@@ -13,7 +13,7 @@ export default function GetTimer(props) {
                     <input type="text" value={props.sec} onChange={s => props.setS(s.target.value)} placeholder={"seconds"} />
                 </div>
             </div>
-            <button class="button-50" onClick={() => props.setT(true) }>  
+            <button class="button-50 join2" onClick={() => props.setT(true) }>  
                 Enter
             </button>
         </div>
