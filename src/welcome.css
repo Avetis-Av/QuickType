@@ -7,14 +7,8 @@
 .welcome h1{
 	font-size: 3em;
 }
+ 
 
-.welcome button{
-	border-radius: 5px;
-	width: 100%;
+.button-50.join{
 	font-size: 2em;
-	color: #c8d6e5;
-}
-
-.welcome button:hover{
-	cursor: pointer;
 }
